@@ -1,0 +1,98 @@
+<div class="card mb-0 rounded-0">
+    <div class="card-header card-custom-top">
+      <h5 class="align-middle text-dark">
+        Extrato
+      </h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <form [formGroup]="form">
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <div class="form-group">
+                    <label class="form-required">
+                      <small [ngClass]="{'text-red': displayMessage.agencia}">Agência</small>
+                    </label>
+                    <input type="text" class="form-control" formControlName="agencia" [ngClass]="{'is-invalid': displayMessage.agencia}" >
+                    <small class="form-text text-red" [innerHTML]="displayMessage.cpf"></small>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label class="form-required">
+                        <small [ngClass]="{'text-red': displayMessage.numeroConta}">Número da conta</small>
+                      </label>
+                      <input type="text" class="form-control" formControlName="numeroConta" [ngClass]="{'is-invalid': displayMessage.numeroConta}">
+                      <small class="form-text text-red" [innerHTML]="displayMessage.numeroConta"></small>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label class="form-required">
+                        <small [ngClass]="{'text-red': displayMessage.dataIncial}">Data inicial</small>
+                      </label>
+                      <input type="date" class="form-control" formControlName="dataIncial" [ngClass]="{'is-invalid': displayMessage.dataIncial}">
+                      <small class="form-text text-red" [innerHTML]="displayMessage.dataIncial"></small>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label class="form-required">
+                        <small [ngClass]="{'text-red': displayMessage.dataFinal}">Data final</small>
+                      </label>
+                      <input type="date" class="form-control" formControlName="dataFinal" [ngClass]="{'is-invalid': displayMessage.dataFinal}" >
+                      <small class="form-text text-red" [innerHTML]="displayMessage.dataFinal"></small>
+                    </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-12">
+            <button type="submit" class="btn btn-danger btn-sm float-right" [disabled]="form.invalid" (click)="onSubmit()">
+              <i class="fa fa-check"></i>
+              Consultar
+            </button>
+            <a class="btn btn-secondary btn-sm float-right mr-1" [routerLink]="['/conta/operacoes']">
+              <i class="fa fa-times"></i>
+              Cancelar
+            </a>
+          </div>
+        </div>
+      </div>
+    <!-- ---------- -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <app-table-custom [items]="extrato" [itemsPerPage]="15">
+            <ng-template appTableHeader>
+              <tr class="bg-gray-light">
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Valor</th>
+              </tr>
+            </ng-template>
+            <ng-template appTableBody let-item>
+              <tr>
+                <td>{{item.data}}</td>
+                <td>{{item.tipoTrasacao}}</td>
+                <td>{{item.valor}}</td>
+              </tr>
+            </ng-template>
+            <ng-template appTableEmpty>
+              <tr>
+                <td colspan="5" class="text-center">
+                  Nenhum registro foi encontrado
+                </td>
+              </tr>
+            </ng-template>
+          </app-table-custom>
+        </div>
+      </div>
+    </div>
+  </div>
+  
